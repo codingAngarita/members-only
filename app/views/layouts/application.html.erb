@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <% if flash[:warning] %>
+      <div class="notice"><%= flash[:warning] %></div>
+    <% end %>
     <%= yield %>
+    <%= link_to "Sign out", action_name: "delete"%>
   </body>
 </html>
