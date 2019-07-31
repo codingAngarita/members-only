@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_create :generateToken
 
   has_secure_password
+  has_many :posts
 
   private def generateToken
     token = SecureRandom.urlsafe_base64
