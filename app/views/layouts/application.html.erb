@@ -14,11 +14,12 @@
       <div class="notice"><%= flash[:warning] %></div>
     <% end %>
     <%= yield %>
+    <%= sign_in? %>
     <% if sign_in? %>
-      <%= @current_user.username %>
+      <%= "User : #{@current_user.username}" %>
+      <%= link_to "Sign out", sessions_delete_path, method: :delete %>
     <% else %>
       <%= link_to "Log in", new_session_path %>
     <% end %>
-    <%= link_to "Sign out", sessions_delete_path, method: :delete if sign_in? %>
   </body>
 </html>
