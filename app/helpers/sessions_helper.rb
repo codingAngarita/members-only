@@ -1,8 +1,7 @@
 module SessionsHelper
   def sign_in(user)
     token = generate_token
-    user.remember_token = token
-    user.update_attribute(:remember_token,token)
+    user.update_attribute(:remember_token, token)
     cookies.signed.permanent[:remember_token] = token
   end
 
@@ -19,7 +18,6 @@ module SessionsHelper
   end
 
   def sign_out
-    puts 'dsf'
     @current_user = nil
     cookies.delete :remember_token
   end
