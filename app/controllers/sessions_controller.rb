@@ -14,14 +14,16 @@ class SessionsController < ApplicationController
       flash[:warning] = "Succesful login"
       sign_in(user)
       set_current_user(user)
-      render "index"
+      redirect_to sessions_path
     else
       flash.now[:warning] = "Wrong combination of email/password"
       render "new"
     end
   end
 
-  def delete
+  def destroy
     sign_out
+    flash[:warning] = "You have logged out correctly"
+    redirect_to new_session_path
   end
 end

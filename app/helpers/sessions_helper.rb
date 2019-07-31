@@ -3,11 +3,8 @@ module SessionsHelper
   def sign_in(user)
     token = generate_token
     user.remember_token = token
-    puts token
+    user.update_attribute(:remember_token,token)
     cookies.signed.permanent[:remember_token] = token
-    puts cookies.signed.permanent[:remember_token]
-    puts User.find(1).remember_token
-    puts User.find_by(remember_token: cookies.signed.permanent[:remember_token])
   end
 
   def set_current_user(user)
@@ -19,13 +16,15 @@ module SessionsHelper
   end
 
   def sign_out
+    puts 'dsf'
     @current_user = nil
-    cookies.signed.permanent.delete :remember_token
+    cookies.delete :remember_token
   end
 
  private 
   def generate_token
     token = SecureRandom.urlsafe_base64
+    token = Digest::SHA1.hexdigest(token)
     token = token.to_s
   end 
 end
