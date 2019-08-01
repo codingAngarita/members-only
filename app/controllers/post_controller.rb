@@ -2,6 +2,7 @@ class PostController < ApplicationController
   before_action :checkSession, only: [:new, :create]
 
   def index
+    @posts = Post.all
   end
 
   def new
@@ -10,8 +11,8 @@ class PostController < ApplicationController
 
   def create
     if Post.create(post_params)
-      flash[:warning] = "Post Successful"
-      redirect_to post_path
+      flash[:notice] = "Post Successful"
+      redirect_to post_index_path
     else
       flash.now[:warning] = "Post not saved, something went wrong"
       render "new"
@@ -24,8 +25,10 @@ class PostController < ApplicationController
   end
 
   def post_params
+    hash = params.require(:post).permit(:title, :content, :user_id, :user_username)
     user = current_user
-    params[:post][:user_id] = user.id
-    params.require(:post).permit(:title, :content, :user_id)
+    hash[:user_id] = user.id
+    hash[:user_username] = user.username
+    hash
   end
 end

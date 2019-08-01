@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:user][:email].downcase)
     if user && user == user.authenticate(params[:user][:password_digest])
-      flash[:warning] = "Succesful login"
+      flash[:notice] = "Succesful login"
       sign_in(user)
       redirect_to sessions_path
     else
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    flash[:warning] = "You have logged out correctly"
+    flash[:notice] = "You have logged out correctly"
     redirect_to new_session_path
   end
 end

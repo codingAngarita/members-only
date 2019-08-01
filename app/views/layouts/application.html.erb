@@ -10,11 +10,10 @@
   </head>
 
   <body>
-    <% if flash[:warning] %>
-      <div class="notice"><%= flash[:warning] %></div>
+    <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "#{key}" %>
     <% end %>
     <%= yield %>
-    <%= sign_in? %>
     <% if sign_in? %>
       <%= "User : #{@current_user.username}" %>
       <%= link_to "Sign out", sessions_delete_path, method: :delete %>
