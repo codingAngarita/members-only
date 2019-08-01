@@ -10,15 +10,10 @@
   </head>
 
   <body>
+    <%= render "layouts/navbar" %>
     <% flash.each do |key, value| %>
       <%= content_tag :div, value, class: "#{key}" %>
     <% end %>
     <%= yield %>
-    <% if sign_in? %>
-      <%= "User : #{@current_user.username}" %>
-      <%= link_to "Sign out", sessions_delete_path, method: :delete %>
-    <% else %>
-      <%= link_to "Log in", new_session_path %>
-    <% end %>
   </body>
 </html>
