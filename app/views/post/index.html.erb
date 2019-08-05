@@ -1,0 +1,9 @@
+<h1>I'm a Title</h1>
+<% @posts.each do |post| %>
+  <%= "Author: #{post.user_username}" if sign_in? %>
+  <br>
+  <%= "Post title: #{post.title}" %>
+  <br>
+  <%= "Content\n#{post.content}" %>
+  <hr>
+<% end %>
