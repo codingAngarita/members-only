@@ -5,5 +5,10 @@
   <%= "Post title: #{post.title}" %>
   <br>
   <%= "Content\n#{post.content}" %>
+  <% if sign_in? && current_user.id == post.user_id %>
+    <br>
+    <%= link_to "Edit post", edit_post_path(post.id) %>
+    <%= link_to "Delete post", post_path(post.id), method: :DELETE %>
+  <% end %>
   <hr>
 <% end %>
