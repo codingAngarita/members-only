@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if user.save
       flash[:notice] = "User Created Successfully"
       sign_in(user)
-      redirect_to post_index_path
+      redirect_to root_path
     else
       flash.now[:warning] = "There was a problem creating the user, please try again later"
       render "new"

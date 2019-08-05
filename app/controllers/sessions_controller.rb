@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if user && user == user.authenticate(params[:user][:password_digest])
       flash[:notice] = "Succesful login"
       sign_in(user)
-      redirect_to sessions_path
+      redirect_to root_path
     else
       flash.now[:warning] = "Wrong combination of email/password"
       render "new"
