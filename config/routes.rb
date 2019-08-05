@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :sessions
-  resources :post, only: [:new, :create, :index]
-  resources :user, only: [:new, :create]
+  resources :posts, only: [:new, :create, :index]
+  resources :users, only: [:new, :create]
   get 'sessions/delete'
 end

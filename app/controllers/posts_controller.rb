@@ -1,4 +1,4 @@
-class PostController < ApplicationController
+class PostsController < ApplicationController
   before_action :checkSession, only: [:new, :create]
 
   def index
