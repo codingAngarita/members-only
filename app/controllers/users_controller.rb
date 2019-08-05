@@ -10,8 +10,8 @@ class UsersController < ApplicationController
       sign_in(user)
       redirect_to post_index_path
     else
-      flash.now[:warning] = "User not created"
-      redender "new"
+      flash.now[:warning] = "There was a problem creating the user, please try again later"
+      render "new"
     end
   end
 

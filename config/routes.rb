@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :sessions
+  root 'posts#index'
+  resources :sessions, only: [:new, :create, :destroy]
   resources :posts, only: [:new, :create, :index]
   resources :users, only: [:new, :create]
-  get 'sessions/delete'
 end
