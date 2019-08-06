@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   require 'digest'
 
+  has_many :posts
+  
   before_create :generateToken
   before_save { self.email = email.downcase }
 
@@ -12,7 +14,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   has_secure_password
-  private def generateToken
+
+  private
+  def generateToken
     token = SecureRandom.urlsafe_base64
     token = Digest::SHA1.hexdigest(token)
     token = token.to_s
