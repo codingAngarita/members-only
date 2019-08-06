@@ -34,7 +34,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    if Post.create(post_params)
+    @post = current_user.posts.build(post_params)
+    @post.user_username = current_user.username
+    if @post.save
       flash[:notice] = "Post Successful"
       redirect_to root_path
     else
@@ -59,10 +61,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    hash = params.require(:post).permit(:title, :content, :user_id, :user_username)
-    user = current_user
-    hash[:user_id] = user.id
-    hash[:user_username] = user.username
-    hash
+    params.require(:post).permit(:title, :content)
   end
 end
