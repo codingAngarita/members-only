@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  require 'digest'
-
   has_many :posts
   
   before_create :generateToken
